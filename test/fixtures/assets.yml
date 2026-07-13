@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  serial: MyString
+  checkedOutTo: MyString
+  purchaseCost: 1.5
+
+two:
+  name: MyString
+  serial: MyString
+  checkedOutTo: MyString
+  purchaseCost: 1.5

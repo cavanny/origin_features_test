@@ -1,0 +1,105 @@
+<div class="settings-page">
+
+  <div class="inventory-toolbar">
+    <h1>Configuration</h1>
+    <%= link_to "Back to inventory", root_path, class: "btn-secondary" %>
+  </div>
+
+  <p class="settings-intro">
+    These lists feed the dropdowns on the asset form. An entry still used by an
+    asset can't be deleted.
+  </p>
+
+  <div class="settings-grid">
+
+    <section class="form-card">
+      <h2 class="form-title">Categories</h2>
+      <p class="form-subtitle"><%= pluralize(@categories.size, "category") %></p>
+
+      <% if @category.errors.any? %>
+        <div class="form-errors">
+          <ul class="form-errors__list">
+            <% @category.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @categories.empty? %>
+        <p class="settings-empty">No categories yet.</p>
+      <% else %>
+        <ul class="settings-list">
+          <% @categories.each do |category| %>
+            <li class="settings-list__item">
+              <span class="settings-list__name"><%= category.name %></span>
+              <span class="settings-list__count">
+                <%= pluralize(category.assets.size, "asset") %>
+              </span>
+              <%= button_to "Delete", category_path(category), method: :delete,
+                    class: "btn-sm btn-delete",
+                    form: { style: "display:inline" },
+                    data: { turbo_confirm: "Delete “#{category.name}”?" } %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= form_with model: @category, class: "settings-form" do |form| %>
+        <div class="form-group">
+          <%= form.label :name, "New category", class: "form-label" %>
+          <%= form.text_field :name, class: "form-input", placeholder: "Monitors" %>
+        </div>
+        <%= form.submit "Add", class: "btn-primary" %>
+      <% end %>
+    </section>
+
+    <section class="form-card">
+      <h2 class="form-title">Statuses</h2>
+      <p class="form-subtitle"><%= pluralize(@statuses.size, "status") %></p>
+
+      <% if @status.errors.any? %>
+        <div class="form-errors">
+          <ul class="form-errors__list">
+            <% @status.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @statuses.empty? %>
+        <p class="settings-empty">No statuses yet.</p>
+      <% else %>
+        <ul class="settings-list">
+          <% @statuses.each do |status| %>
+            <li class="settings-list__item">
+              <span class="status-badge <%= status.badge_class %>"><%= status.name %></span>
+              <span class="settings-list__count">
+                <%= pluralize(status.assets.size, "asset") %>
+              </span>
+              <%= button_to "Delete", status_path(status), method: :delete,
+                    class: "btn-sm btn-delete",
+                    form: { style: "display:inline" },
+                    data: { turbo_confirm: "Delete “#{status.name}”?" } %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= form_with model: @status, class: "settings-form" do |form| %>
+        <div class="form-group">
+          <%= form.label :name, "New status", class: "form-label" %>
+          <%= form.text_field :name, class: "form-input", placeholder: "On order" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :color, "Badge colour", class: "form-label" %>
+          <%= form.select :color, Status::COLORS.map { |c| [c.capitalize, c] },
+                {}, { class: "form-input" } %>
+        </div>
+        <%= form.submit "Add", class: "btn-primary" %>
+      <% end %>
+    </section>
+
+  </div>
+</div>

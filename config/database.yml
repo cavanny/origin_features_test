@@ -1,0 +1,30 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+#   Ensure the pg gem is defined in your Gemfile
+#   gem "pg"
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Connects over the local Unix socket by default. Set these env vars to
+  # connect over TCP instead (Docker, CI, managed hosts).
+  host: <%= ENV.fetch("DATABASE_HOST", nil) %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", nil) %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
+
+development:
+  <<: *default
+  database: origin_inventory_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: origin_inventory_test
+
+production:
+  <<: *default
+  database: origin_inventory_production
+  url: <%= ENV.fetch("DATABASE_URL", nil) %>

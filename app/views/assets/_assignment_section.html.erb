@@ -1,0 +1,72 @@
+<div id="<%= dom_id(asset, :assignment_section) %>" class="assignment-section">
+
+  <% if assignment&.errors&.any? %>
+    <div class="form-errors">
+      <ul class="form-errors__list">
+        <% assignment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if asset.checked_out? %>
+    <% current = asset.current_assignment %>
+    <div class="assignment-current">
+      <div>
+        <span class="assignment-current__label">Currently checked out to</span>
+        <strong class="assignment-current__name"><%= current.employe.employeName %></strong>
+        <span class="assignment-current__meta">
+          <%= current.employe.title %> · since <%= l(current.checked_out_at.to_date, format: :long) %>
+          (<%= pluralize(current.duration_in_days.floor, "day") %>)
+        </span>
+      </div>
+
+      <%= button_to "Check in", asset_assignment_path(asset, current),
+            method: :patch, class: "btn-primary" %>
+    </div>
+  <% else %>
+    <%= form_with url: asset_assignments_path(asset), method: :post, class: "assignment-form" do %>
+      <div class="form-group">
+        <label class="form-label" for="employe_id">Check out to</label>
+        <%= select_tag :employe_id,
+              options_from_collection_for_select(employes, :id, :employeName),
+              class: "form-input" %>
+      </div>
+      <%= submit_tag "Check out", class: "btn-primary" %>
+    <% end %>
+  <% end %>
+
+  <h2 class="assignment-history__title">History</h2>
+
+  <% if asset.history.empty? %>
+    <p class="assignment-history__empty">This asset has never been checked out.</p>
+  <% else %>
+    <table class="inventory-table assignment-history-table">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Checked out</th>
+          <th>Checked in</th>
+          <th>Days</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% asset.history.each do |entry| %>
+          <tr>
+            <td><%= entry.employe.employeName %></td>
+            <td><%= entry.checked_out_at.to_date %></td>
+            <td>
+              <% if entry.active? %>
+                <em>Still out</em>
+              <% else %>
+                <%= entry.checked_in_at.to_date %>
+              <% end %>
+            </td>
+            <td><%= entry.duration_in_days.floor %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

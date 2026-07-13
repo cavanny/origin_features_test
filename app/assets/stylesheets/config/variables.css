@@ -1,0 +1,119 @@
+/* Flatly 5.3.8 — Bootswatch */
+
+:root {
+  /* Color system */
+  --white:    #fff;
+  --gray-100: #f8f9fa;
+  --gray-200: #ecf0f1;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #b4bcc2;
+  --gray-600: #95a5a6;
+  --gray-700: #7b8a8b;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --black:    #000;
+
+  --blue:   #2c3e50;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink:   #e83e8c;
+  --red:    #e74c3c;
+  --orange: #fd7e14;
+  --yellow: #f39c12;
+  --green:  #18bc9c;
+  --teal:   #20c997;
+  --cyan:   #3498db;
+
+  --origin-color-golden: #a0644a;
+  --origin-color-black:  #31383f;
+
+  --primary:       var(--origin-color-black);
+  --origin-golden: var(--origin-color-golden);
+  --secondary:     var(--gray-600);
+  --success:       var(--green);
+  --info:          var(--cyan);
+  --warning:       var(--yellow);
+  --danger:        var(--red);
+  --light:         var(--gray-200);
+  --dark:          var(--gray-700);
+
+  /* Shades previously produced by darken()/lighten() */
+  --primary-dark:           #1f2428; /* darken(--primary, 8%) */
+  --success-dark:           #0f7864; /* darken(--success, 15%) */
+  --success-light:          #3be6c4; /* lighten(--success, 15%) */
+
+  /* Links */
+  --link-color: var(--success);
+
+  /* Fonts */
+  --font-family-sans-serif: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --h1-font-size: 3rem;
+  --h2-font-size: 2.5rem;
+  --h3-font-size: 2rem;
+
+  /* Tables */
+  --table-color: initial;
+
+  /* Dropdowns */
+  --dropdown-border-color:     var(--gray-400);
+  --dropdown-link-color:       var(--gray-700);
+  --dropdown-link-hover-color: var(--white);
+  --dropdown-link-hover-bg:    var(--primary);
+
+  /* Navs */
+  --nav-link-padding-y:      .5rem;
+  --nav-link-padding-x:      2rem;
+  --nav-link-disabled-color: var(--gray-600);
+
+  --nav-tabs-border-color:             var(--dropdown-border-color);
+  --nav-tabs-link-hover-border-color:  var(--nav-tabs-border-color) var(--nav-tabs-border-color) transparent;
+  --nav-tabs-link-active-color:        var(--success);
+  --nav-tabs-link-active-border-color: var(--nav-tabs-link-hover-border-color);
+
+  /* Navbar */
+  --navbar-padding-y:             1rem;
+  --navbar-dark-color:            var(--white);
+  --navbar-dark-hover-color:      var(--success);
+  --navbar-dark-active-color:     var(--success);
+  --navbar-dark-brand-color:      var(--white);
+  --navbar-dark-brand-hover-color: var(--navbar-dark-hover-color);
+
+  /* Pagination */
+  --pagination-color:                 var(--white);
+  --pagination-bg:                    var(--success);
+  --pagination-border-width:          0;
+  --pagination-border-color:          transparent;
+  --pagination-hover-color:           var(--white);
+  --pagination-hover-bg:              var(--success-dark);
+  --pagination-hover-border-color:    transparent;
+  --pagination-active-bg:             var(--pagination-hover-bg);
+  --pagination-active-border-color:   transparent;
+  --pagination-disabled-color:        var(--gray-200);
+  --pagination-disabled-bg:           var(--success-light);
+  --pagination-disabled-border-color: transparent;
+
+  /* List group */
+  --list-group-hover-bg:    var(--gray-200);
+  --list-group-disabled-bg: var(--gray-200);
+
+  /* Breadcrumbs */
+  --breadcrumb-padding-y:     .375rem;
+  --breadcrumb-padding-x:     .75rem;
+  --breadcrumb-border-radius: .25rem;
+
+  /* Close */
+  --btn-close-color:         var(--white);
+  --btn-close-opacity:       .4;
+  --btn-close-hover-opacity: 1;
+
+  /* custom */
+  --radius-sm: 6px;
+  --space-md:  16px;
+
+  /* Forms */
+  --focus-ring:     0 0 0 3px rgba(160, 100, 74, 0.18);
+  --danger-soft-bg: #fdecea;
+  --danger-dark:    #a93226;
+  --shadow-card:    0 1px 2px rgba(49, 56, 63, 0.04), 0 8px 24px rgba(49, 56, 63, 0.07);
+}

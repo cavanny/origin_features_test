@@ -1,0 +1,108 @@
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.detail-list {
+  margin: 8px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--gray-200);
+}
+
+.detail-list__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+  font-family: var(--font-family-sans-serif);
+  font-size: 14px;
+}
+
+.detail-list__row dt {
+  color: var(--gray-600);
+}
+
+.detail-list__row dd {
+  margin: 0;
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.assignment-section {
+  margin-top: 28px;
+}
+
+.assignment-current {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 20px;
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-left: 4px solid var(--origin-golden);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans-serif);
+}
+
+.assignment-current__label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gray-600);
+}
+
+.assignment-current__name {
+  display: block;
+  margin: 2px 0;
+  font-size: 18px;
+  color: var(--primary);
+}
+
+.assignment-current__meta {
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.assignment-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.assignment-form .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.assignment-history__title {
+  margin: 32px 0 12px;
+  font-family: var(--font-family-sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gray-600);
+}
+
+.assignment-history__empty {
+  margin: 0;
+  font-family: var(--font-family-sans-serif);
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.assignment-history-table {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .assignment-form { flex-direction: column; align-items: stretch; }
+}

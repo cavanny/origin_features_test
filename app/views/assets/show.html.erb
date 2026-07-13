@@ -1,0 +1,37 @@
+<div class="form-page">
+  <div class="form-card">
+
+    <div class="detail-header">
+      <div>
+        <h1 class="form-title"><%= @asset.name %></h1>
+        <p class="form-subtitle"><%= @asset.category&.name || "Uncategorized" %></p>
+      </div>
+      <% if @asset.status %>
+        <span class="status-badge <%= @asset.status.badge_class %>"><%= @asset.status.name %></span>
+      <% end %>
+    </div>
+
+    <dl class="detail-list">
+      <div class="detail-list__row">
+        <dt>Serial</dt>
+        <dd><%= @asset.serial.presence || "—" %></dd>
+      </div>
+      <div class="detail-list__row">
+        <dt>Purchase cost</dt>
+        <dd><%= @asset.purchaseCost ? number_to_currency(@asset.purchaseCost) : "—" %></dd>
+      </div>
+      <div class="detail-list__row">
+        <dt>Added</dt>
+        <dd><%= l(@asset.created_at.to_date, format: :long) %></dd>
+      </div>
+    </dl>
+
+    <%= render "assignment_section", asset: @asset, employes: @employes, assignment: nil %>
+
+    <div class="form-actions">
+      <%= link_to "Edit", edit_asset_path(@asset), class: "btn-primary" %>
+      <%= link_to "Back to inventory", root_path, class: "btn-secondary" %>
+    </div>
+
+  </div>
+</div>

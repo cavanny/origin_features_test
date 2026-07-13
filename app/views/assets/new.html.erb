@@ -1,0 +1,9 @@
+<div class="form-page">
+  <div class="form-card">
+    <h1 class="form-title">New asset</h1>
+    <p class="form-subtitle">Add a piece of equipment to the inventory.</p>
+
+    <%= render partial: "form",
+          locals: { asset: @asset, categories: @categories, statuses: @statuses } %>
+  </div>
+</div>

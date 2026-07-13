@@ -1,0 +1,16 @@
+<div class="form-page">
+  <div class="form-card">
+    <h1 class="form-title">Edit asset</h1>
+    <p class="form-subtitle"><%= @asset.name %></p>
+
+    <%= render partial: "form",
+          locals: { asset: @asset, categories: @categories, statuses: @statuses } %>
+
+    <div class="form-actions">
+      <span class="form-actions__spacer"></span>
+      <%= button_to "Delete asset", @asset, method: :delete,
+            class: "btn-danger",
+            data: { turbo_confirm: "Delete this asset? This cannot be undone." } %>
+    </div>
+  </div>
+</div>

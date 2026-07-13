@@ -1,0 +1,15 @@
+/*
+ * Manifest file compiled into application.css by Sprockets.
+ * Order matters: variables first, then base, then components.
+ *
+ *= require config/variables
+ *= require base/reset
+ *= require components/buttons
+ *= require components/cards
+ *= require components/forms
+ *= require components/auth
+ *= require components/table
+ *= require components/assignments
+ *= require components/settings
+ *= require_self
+ */

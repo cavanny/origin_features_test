@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  asset: one
+  employe: one
+  checked_out_at: 2026-07-13 13:18:56
+  checked_in_at: 2026-07-13 13:18:56
+  notes: MyText
+
+two:
+  asset: two
+  employe: two
+  checked_out_at: 2026-07-13 13:18:56
+  checked_in_at: 2026-07-13 13:18:56
+  notes: MyText

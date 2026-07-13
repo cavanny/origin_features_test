@@ -1,0 +1,52 @@
+wb = xlsx_package.workbook
+
+header = wb.styles.add_style(b: true, bg_color: "31383F", fg_color: "FFFFFF",
+                             alignment: { horizontal: :left })
+money  = wb.styles.add_style(format_code: "#,##0.00 $")
+date   = wb.styles.add_style(format_code: "yyyy-mm-dd")
+
+wb.add_worksheet(name: "Inventory") do |sheet|
+  sheet.add_row ["Name", "Serial", "Category", "Status", "Purchase Cost",
+                 "Checked Out To", "Since"],
+                style: header
+
+  @assets.each do |asset|
+    assignment = asset.current_assignment
+
+    sheet.add_row [
+      asset.name,
+      asset.serial,
+      asset.category&.name,
+      asset.status&.name,
+      asset.purchaseCost,
+      assignment&.employe&.employeName,
+      assignment&.checked_out_at&.to_date
+    ], style: [nil, nil, nil, nil, money, nil, date]
+  end
+
+  if @assets.any?
+    last = @assets.size + 1
+    sheet.add_row ["Total", nil, nil, nil, "=SOMME(E2:E#{last})", nil, nil],
+                  style: [header, nil, nil, nil, money, nil, nil]
+  end
+
+  sheet.column_widths 28, 16, 18, 16, 16, 26, 14
+  sheet.auto_filter = "A1:G#{@assets.size + 1}"
+end
+
+wb.add_worksheet(name: "Assignment history") do |sheet|
+  sheet.add_row ["Asset", "Employee", "Checked Out", "Checked In", "Days"],
+                style: header
+
+  AssetAssignment.includes(:asset, :employe).most_recent_first.each do |entry|
+    sheet.add_row [
+      entry.asset.name,
+      entry.employe.employeName,
+      entry.checked_out_at&.to_date,
+      entry.checked_in_at&.to_date,
+      entry.duration_in_days.floor
+    ], style: [nil, nil, date, date, nil]
+  end
+
+  sheet.column_widths 28, 26, 14, 14, 8
+end

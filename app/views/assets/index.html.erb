@@ -1,0 +1,63 @@
+<div class="inventory-page">
+
+  <div class="inventory-toolbar">
+    <h1>Assets</h1>
+    <div style="display:flex; gap:10px;">
+      <%= link_to "New Asset", new_asset_path, class: "btn-primary" %>
+      <%= link_to "Export Excel", assets_path(format: :xlsx), class: "btn-secondary" %>
+      <%= link_to "Configuration", settings_path, class: "btn-secondary" %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn-sm btn-primary" %>
+    </div>
+  </div>
+
+  <div class="inventory-table-wrap">
+    <% if @assets.empty? %>
+      <div class="inventory-empty">
+        <p>No assets yet.</p>
+        <%= link_to "Add your first asset", new_asset_path, class: "btn-primary" %>
+      </div>
+    <% else %>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Serial</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Checked Out To</th>
+            <th>Purchase Cost</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @assets.each do |asset| %>
+            <tr>
+              <td class="asset-name"><%= link_to asset.name, asset %></td>
+              <td><%= asset.serial %></td>
+              <td><%= asset.category&.name || "—" %></td>
+              <td>
+                <% if asset.status %>
+                  <span class="status-badge <%= asset.status.badge_class %>">
+                    <%= asset.status.name %>
+                  </span>
+                <% else %>
+                  —
+                <% end %>
+              </td>
+              <td><%= asset.current_holder&.employeName || "—" %></td>
+              <td><%= asset.purchaseCost ? "$#{"%.2f" % asset.purchaseCost}" : "—" %></td>
+              <td class="asset-actions">
+                <%= link_to "Edit", edit_asset_path(asset), class: "btn-sm btn-edit" %>
+                <%= button_to "Delete", asset, method: :delete,
+                      data: { turbo_confirm: "Delete #{asset.name}?" },
+                      class: "btn-sm btn-delete",
+                      form: { style: "display:inline" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+</div>
